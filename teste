@@ -3,27 +3,79 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Imagem no Centro</title>
-  <style>
-    body, html {
-      height: 100%;
-      margin: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background-color: #f0f0f0; /* Cor de fundo opcional */
-    }
-    img {
-      max-width: 100%;
-      max-height: 100%;
-    }
-  </style>
+  <title>Meu Site</title>
+  <!-- Clarity Analytics Script -->
+  <script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+      c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+      t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+      y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "hrknnx7t33");
+  </script>
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 </head>
 <body>
-  <img src="https://cdn.prod.website-files.com/65b04dbe9a61b6dd8fc6aec9/66b3902cb9e4150d47869612_enerlivre-logo.png" alt="Logo">
+  <!-- WhatsApp Floating Button -->
+  <a class="botao-whatsapp-flutuante-click" onclick="sendMessage()" style="position:fixed;width:60px;height:60px;bottom:8%;right:8%;background-color:#25d366;color:#FFF;border-radius:50px;text-align:center;font-size:30px;box-shadow: 1px 1px 2px #888; z-index:1000;" target="_blank" id="sendMessageBtn">
+    <i style="margin-top:16px" class="fa fa-whatsapp"></i>
+  </a>
+
+  <!-- WhatsApp Widget Box -->
+  <div id="whts_widget_box" style="display: block; opacity: 1; z-index: 999; width: 290px; padding: 16px 22px; position: fixed; bottom: 12%; right: 10%; transition: all 0.3s ease-out; background-color: #fff; border-radius: 5px; box-shadow: 0px 0px 5px 1px rgba(0,0,0,0.2);">
+    <textarea rows="2" id="text-whatsapp" onfocus="this.value = this.value;" onkeyup="enviar_enter(event)" style="height:auto; max-width: 100%; color:#999; font-weight:400; font-size: 14px; font-family:'Ubuntu', Helvetica, Arial, sans-serif; width:100%; background:#fff; border-radius:3px; border:none; padding:10px; box-shadow:0px 0px 5px 1px rgba(0,0,0,0.1);"></textarea>
+  </div>
+
+  <!-- JavaScript -->
   <script>
-    // Seu código JavaScript aqui
-    console.log("Imagem carregada no centro da tela");
+    document.addEventListener('DOMContentLoaded', () => {
+      showPopup(); // Chama showPopup automaticamente ao carregar a página
+      alterar_texto_textArea();
+    });
+
+    function showPopup() {
+      document.getElementById('whts_widget_box').style.display = "block";
+      document.getElementById('text-whatsapp').focus();
+      moveCursorToEnd(document.getElementById('text-whatsapp'));
+    }
+
+    function alterar_texto_textArea() {
+      const h1Text = document.querySelector("h1") ? document.querySelector("h1").textContent : "Olá";
+      const textAreaWhatsapp = document.querySelector("#text-whatsapp");
+
+      textAreaWhatsapp.value = `Olá, ${h1Text}?`;
+    }
+
+    function enviar_enter(event) {
+      if (event.keyCode == 13) {
+        sendMessage();
+      }
+    }
+
+    function sendMessage() {
+      let message = document.getElementById('text-whatsapp').value;
+      let number = "5515981891308";
+
+      message = encodeURIComponent(message);
+      let url = detectar_mobile() ? `https://api.whatsapp.com/send?phone=${number}&text=${message}` : `https://web.whatsapp.com/send?phone=${number}&text=${message}`;
+      
+      window.location.href = url;
+    }
+
+    function moveCursorToEnd(el) {
+      if (typeof el.selectionStart == "number") {
+        el.selectionStart = el.selectionEnd = el.value.length;
+      } else if (typeof el.createTextRange != "undefined") {
+        el.focus();
+        var range = el.createTextRange();
+        range.collapse(false);
+        range.select();
+      }
+    }
+
+    function detectar_mobile() {
+      return /android|iphone|ipad|ipod|opera mini|iemobile|mobile/i.test(navigator.userAgent);
+    }
   </script>
 </body>
 </html>
