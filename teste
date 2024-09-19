@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Imagem no Centro</title>
+  <style>
+    body, html {
+      height: 100%;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #f0f0f0; /* Cor de fundo opcional */
+    }
+    img {
+      max-width: 100%;
+      max-height: 100%;
+    }
+  </style>
+</head>
+<body>
+  <img src="https://cdn.prod.website-files.com/65b04dbe9a61b6dd8fc6aec9/66b3902cb9e4150d47869612_enerlivre-logo.png" alt="Logo">
+  <script>
+    // Seu código JavaScript aqui
+    console.log("Imagem carregada no centro da tela");
+  </script>
+</body>
+</html>
